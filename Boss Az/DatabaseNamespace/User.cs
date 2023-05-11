@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Boss.Members;
 using Boss.ModelsNamespace;
+using static Boss.Functions.Functions;
 
 namespace Boss.DatabaseNamespace {
     public class User : Person {
@@ -23,11 +24,12 @@ namespace Boss.DatabaseNamespace {
         public string Password { get { return _password; } 
             set {
                 try {
-                    if (_password.Length < 8) throw new Exception("Password couldn't be lower than 8 character !");
+                    if (value.Length < 8) throw new Exception("Password couldn't be lower than 8 character !");
                     _password = value;
                 }
                 catch (Exception ex) {
                     Console.WriteLine(ex.Message);
+                    PressAnyKey();
                 }
             } 
         }
@@ -56,6 +58,7 @@ namespace Boss.DatabaseNamespace {
                 else throw new ArgumentNullException(nameof(notification));
             }catch (Exception ex) {
                 Console.WriteLine(ex.Message);
+                PressAnyKey();
             }
         }
 

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Boss.DatabaseNamespace;
+using Boss.Interfaces;
 using Boss.ModelsNamespace;
+using static Boss.Functions.Functions;
 
 namespace Boss.MembersNamespace {
-    public class Employer : User {
+    public class Employer : User, INotifable {
 
         // Private Fields
 
@@ -32,7 +34,12 @@ namespace Boss.MembersNamespace {
                 else throw new ArgumentNullException(nameof(vacancie));
             }catch (Exception ex) {
                 Console.WriteLine(ex.Message);
+                PressAnyKey();
             }
+        }
+
+        public void addNotification(Notification notification) {
+            Notifications.Add(notification);
         }
     }
 }

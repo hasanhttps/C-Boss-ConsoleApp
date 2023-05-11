@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Boss.Functions.Functions;
 
 namespace Boss.Members {
     public class Person {
@@ -27,9 +28,11 @@ namespace Boss.Members {
                 }
                 catch (Exception ex) when (value < 0) {
                     Console.WriteLine($"{ex.Message} Age can't be lower than zero !");
+                    PressAnyKey();
                 }
                 catch (Exception ex) when (value > 150) {
                     Console.WriteLine($"{ex.Message} Age can't be higher than 150 !");
+                    PressAnyKey();
                 }
             }
         }
@@ -40,6 +43,7 @@ namespace Boss.Members {
                     else throw new Exception("Name must be at least 3 characters !");
                 }catch(Exception ex) {
                     Console.WriteLine(ex.Message);
+                    PressAnyKey();
                 }
             }
         }

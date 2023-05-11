@@ -10,9 +10,9 @@ namespace Boss.DatabaseNamespace {
 
         // Static Fields
 
-        private static Admin _currentAdmin;
-        private static Worker _currentWorker;
-        private static Employer _currentEmployer;
+        private static Admin? _currentAdmin;
+        private static Worker? _currentWorker;
+        private static Employer? _currentEmployer;
 
         // Private Fields
 
@@ -71,7 +71,7 @@ namespace Boss.DatabaseNamespace {
 
         public bool checkWorker(string username, string password) {
             foreach (Worker worker in Workers) {
-                if ((worker.Name == username || worker.Email == username) && worker.Password == password) {
+                if ((worker.UserName == username || worker.Email == username) && worker.Password == password) {
                     _currentWorker = worker;
                     return true;
                 }
@@ -80,7 +80,7 @@ namespace Boss.DatabaseNamespace {
 
         public bool checkEmployer(string username, string password) {
             foreach (Employer employer in Employers) {
-                if ((employer.Name == username || employer.Email == username) && employer.Password == password) {
+                if ((employer.UserName == username || employer.Email == username) && employer.Password == password) {
                     _currentEmployer = employer;
                     return true;
                 }

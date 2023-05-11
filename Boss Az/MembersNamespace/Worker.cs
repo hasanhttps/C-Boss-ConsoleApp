@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Boss.DatabaseNamespace;
+using Boss.Interfaces;
 using Boss.ModelsNamespace;
 
 namespace Boss.MembersNamespace {
-    public class Worker : User {
+    public class Worker : User, INotifable {
 
         // Private Fields
 
@@ -30,9 +31,13 @@ namespace Boss.MembersNamespace {
             try {
                 if (cv != null) { Cvs.Add(cv); }
                 else throw new ArgumentNullException(nameof(cv));
-            }catch (Exception ex) {
+            }catch (ArgumentNullException ex) {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public void addNotification(Notification notification) {
+            Notifications.Add(notification);
         }
     }
 }

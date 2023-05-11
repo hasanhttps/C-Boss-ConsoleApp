@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Boss.Functions.Functions;
 
 namespace Boss.ModelsNamespace {
     public class Cv {
@@ -31,6 +32,7 @@ namespace Boss.ModelsNamespace {
                 }
                 catch (Exception ex) {
                     Console.WriteLine(ex.Message);
+                    PressAnyKey();
                 }
             } 
         }
