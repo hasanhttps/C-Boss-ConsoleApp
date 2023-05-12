@@ -28,7 +28,7 @@ namespace Boss.NetworkNamespace {
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 25;
-            smtp.Credentials = new NetworkCredential("bossconsoleaz@gmail.com", "vrpiyaqxfxkywmez");
+            smtp.Credentials = new NetworkCredential("bossconsoleaz@gmail.com", "olijoozcvknqalsy");
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.EnableSsl = true;
 
