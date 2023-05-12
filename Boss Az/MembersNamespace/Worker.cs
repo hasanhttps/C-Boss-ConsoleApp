@@ -8,7 +8,7 @@ using Boss.Interfaces;
 using Boss.ModelsNamespace;
 
 namespace Boss.MembersNamespace {
-    public class Worker : User, INotifable {
+    public sealed class Worker : User, INotifable {
 
         // Private Fields
 

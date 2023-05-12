@@ -2,12 +2,12 @@
 using System;
 using System.Linq;
 using System.Text;
+using Boss.ModelsNamespace;
+using Boss.MembersNamespace;
 using System.Threading.Tasks;
 using Boss.DatabaseNamespace;
 using System.Collections.Generic;
 using static Boss.NetworkNamespace.Network;
-using Boss.ModelsNamespace;
-using Boss.MembersNamespace;
 
 namespace Boss.Functions {
     public static class Functions {

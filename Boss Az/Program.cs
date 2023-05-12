@@ -6,8 +6,9 @@ using static Boss.NetworkNamespace.Network;
 
 namespace Boss {
     internal class Program {
-        public static DataBase? dataBase = new(); 
         static void Main() {
+            DataBase? dataBase = new(); 
+
             List<string> choose = new();
             choose.Add("Admin");
             choose.Add("User");
@@ -23,6 +24,8 @@ namespace Boss {
                     ExceptionHandling(UserChoose, dataBase!);
                 }else if (index == 2) break;
             }
+
+            dataBase!.saveData();
         }
     }
 }

@@ -9,7 +9,7 @@ using Boss.ModelsNamespace;
 using static Boss.Functions.Functions;
 
 namespace Boss.MembersNamespace {
-    public class Employer : User, INotifable {
+    public sealed class Employer : User, INotifable {
 
         // Private Fields
 
