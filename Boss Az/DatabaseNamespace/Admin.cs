@@ -12,19 +12,22 @@ namespace Boss.DatabaseNamespace {
 
         // Private Fields
 
-        private string _email;
-        private string _username;
-        private string _password;
-        private List<Notification> _notifications;
+        private string? _email;
+        private string? _username;
+        private string? _password;
+        private static Dictionary<string, List<Vacancie>>? _requestedVacancies = new();
+        private static List<Notification> _notifications = new();
 
         // Properties
 
-        public string UserName { get { return _username; } set { _username = value; } }
-        public string Email { get { return _email; } set { _email = value; } }
-        public string Password { get { return _password; } 
+        public static List<Notification> Notifications { get { return _notifications; } set { _notifications = value; } }
+        public static Dictionary<string, List<Vacancie>>? RequestedVacancies { get { return _requestedVacancies; } set { _requestedVacancies = value; } }
+        public string? UserName { get { return _username; } set { _username = value; } }
+        public string? Email { get { return _email; } set { _email = value; } }
+        public string? Password { get { return _password; } 
             set {
                 try {
-                    if (value.Length < 8) throw new Exception("Password couldn't be lower than 8 character !");
+                    if (value!.Length < 8) throw new Exception("Password couldn't be lower than 8 character !");
                     _password = value;
                 }
                 catch (Exception ex) {
@@ -33,7 +36,6 @@ namespace Boss.DatabaseNamespace {
                 }
             } 
         }
-        public List<Notification> Notifications { get { return _notifications; } set { _notifications = value; } }
 
         // Constructorcs
 
@@ -53,6 +55,20 @@ namespace Boss.DatabaseNamespace {
             }catch (Exception ex) {
                 Console.WriteLine(ex.Message);
                 PressAnyKey();
+            }
+        }
+
+        public void showRequestVacancies() {
+            foreach (var vacancies in RequestedVacancies!.Values) {
+                foreach (var vacancie in vacancies) {
+                    Console.WriteLine(vacancie);
+                }
+            }
+        }
+
+        public void showNotifications() {
+            foreach (var notification in Notifications) {
+                Console.WriteLine(notification);
             }
         }
 

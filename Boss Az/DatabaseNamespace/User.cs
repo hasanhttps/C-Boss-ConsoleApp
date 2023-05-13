@@ -15,6 +15,7 @@ namespace Boss.DatabaseNamespace {
         private string _email;
         private string _username;
         private string _password;
+        private int _budget;
         private List<Notification> _notifications;
 
         // Properties
@@ -33,6 +34,17 @@ namespace Boss.DatabaseNamespace {
                 }
             } 
         }
+        public int Budget { get { return _budget; }
+            set {
+                try {
+                    if (value < 0) throw new Exception("Budget could'nt be lower than zero !");
+                    _budget = value;
+                } catch (Exception ex) {
+                    Console.WriteLine(ex.Message);
+                    PressAnyKey();
+                }
+            }
+        }
         public List<Notification> Notifications { get { return _notifications; } set { _notifications = value; } }
 
         // Constructorcs
@@ -43,11 +55,12 @@ namespace Boss.DatabaseNamespace {
             Password = password;
             Email = email;
         }
-        public User(string username, string email, string password, Person person)
+        public User(string username, string email, string password, int budget, Person person)
             : base(person.Name, person.Surname, person.City, person.Phone, person.Age){
             UserName = username;
             Password = password;
             Email = email;
+            Budget = budget;
         }
 
         // Functions

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static Boss.Functions.Functions;
 
@@ -39,8 +40,8 @@ namespace Boss.Members {
         public string Name { get { return _name; }
             set {
                 try {
-                    if (value.Length >= 3) _name = value;
-                    else throw new Exception("Name must be at least 3 characters !");
+                    if (value.Length >= 3 && Regex.IsMatch(value, "^[a-zA-Z]*$")) _name = value;
+                    else throw new Exception("Not valid name format !");
                 }catch(Exception ex) {
                     Console.WriteLine(ex.Message);
                     PressAnyKey();

@@ -13,7 +13,7 @@ namespace Boss.MembersNamespace {
 
         // Private Fields
 
-        private List<Vacancie> _vacancies;
+        private List<Vacancie> _vacancies = new();
 
         // Properties
 
@@ -23,13 +23,14 @@ namespace Boss.MembersNamespace {
 
         public Employer() { }
         public Employer(User user)
-            : base(user.UserName, user.Email, user.Password, user)
+            : base(user.UserName, user.Email, user.Password, user.Budget, user)
         { }
 
         // Functions
 
         public void addVanacncie(Vacancie? vacancie) {
             try {
+                Console.WriteLine(vacancie);
                 if (vacancie != null) { Vacancies.Add(vacancie); }
                 else throw new ArgumentNullException(nameof(vacancie));
             }catch (Exception ex) {

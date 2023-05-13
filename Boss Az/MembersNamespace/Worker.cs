@@ -22,7 +22,7 @@ namespace Boss.MembersNamespace {
 
         public Worker() { }
         public Worker(User user)
-            : base(user.UserName, user.Email, user.Password, user)
+            : base(user.UserName, user.Email, user.Password, user.Budget, user)
         { }
 
         // Functions

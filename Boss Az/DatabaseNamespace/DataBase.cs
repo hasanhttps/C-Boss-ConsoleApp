@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Boss.MembersNamespace;
+using Boss.ModelsNamespace;
 using static Boss.DatabaseNamespace.JsonHandling;
 
 namespace Boss.DatabaseNamespace {
@@ -11,9 +12,9 @@ namespace Boss.DatabaseNamespace {
 
         // Static Fields
 
-        private static Admin? _currentAdmin;
-        private static Worker? _currentWorker;
-        private static Employer? _currentEmployer;
+        private Admin? _currentAdmin;
+        private Worker? _currentWorker;
+        private Employer? _currentEmployer;
 
         // Private Fields
 
@@ -26,40 +27,21 @@ namespace Boss.DatabaseNamespace {
         public List<Admin> Admins { get { return _admins; } set { _admins = value; } }
         public List<Worker> Workers { get { return _workers; } set { _workers = value; } }
         public List<Employer> Employers { get { return _employers; } set { _employers = value; } }
-        public static Admin? currentAdmin { get { return _currentAdmin; } }
-        public static Worker? currentWorker { get { return _currentWorker; } }
-        public static Employer? currentEmployer { get { return _currentEmployer; } }
+        public Admin? currentAdmin { get { return _currentAdmin; } }
+        public Worker? currentWorker { get { return _currentWorker; } }
+        public Employer? currentEmployer { get { return _currentEmployer; } }
 
         // Constructors
 
-        public DataBase() { 
-            Admin admin1 = new Admin("Hasanhttps", "hasanabdullazad@gmail.com", "2000Hasan");
-            admin1.Age = 15;
-            admin1.Name = "Hesen";
-            admin1.Surname = "Abdullazade";
-            admin1.City = "Baku";
-            admin1.Phone = "050-335-65-02";
-            _admins.Add(admin1);
+        public DataBase() {
+            List<Admin> admins = ReadData<Admin>("admins");
+            _admins = admins;
 
-            Worker worker = new();
-            worker.Age = 16;
-            worker.Name = "Rustem";
-            worker.Surname = "Hesenli";
-            worker.City = "Baku";
-            worker.Email = "clientrustem2000@gmail.com";
-            worker.UserName = "rustemHh";
-            worker.Password = "2000Rustem";
-            Workers.Add(worker);
+            List<Worker> workers = ReadData<Worker>("workers");
+            _workers = workers;
 
-            Employer employer = new();
-            employer.Age = 16;
-            employer.Name = "Rustem";
-            employer.Surname = "Hesenli";
-            employer.City = "Baku";
-            employer.Email = "rustamh2006@gmail.com";
-            employer.UserName = "rustemHh";
-            employer.Password = "2000Rustem";
-            Employers.Add(employer);
+            List<Employer> employers = ReadData<Employer>("employers");
+            _employers = employers;
         }
 
         // Functions
@@ -91,10 +73,38 @@ namespace Boss.DatabaseNamespace {
             } return false;
         }
 
+        public void applyVacancies(string? id) {
+            List<Vacancie> vacanciesToRemove = new();
+
+            foreach (var keyValuePair in Admin.RequestedVacancies!) {
+                foreach (var vacancie in keyValuePair.Value) {
+                    if (vacancie.Id.ToString() == id) {
+                        foreach (var employer in Employers) {
+                            if (keyValuePair.Key == employer.UserName) {
+                                employer.addVanacncie(vacancie);
+                            }
+                        } vacanciesToRemove.Add(vacancie);
+                    }
+                }
+                foreach (var vacancy in vacanciesToRemove) {
+                    keyValuePair.Value.Remove(vacancy);
+                }
+            }
+        }
+
+        public void showVacancies() {
+            foreach(var employer in Employers) {
+                foreach(var vacancie in employer.Vacancies) {
+                    Console.WriteLine(vacancie);
+                }
+            }
+        }
+
         public void saveData() {
             WriteData<List<Worker>>(Workers, "workers");
             WriteData<List<Employer>>(Employers, "employers");
             WriteData<List<Admin>>(Admins, "admins");
+            
         }
     }
 }

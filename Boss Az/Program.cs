@@ -7,7 +7,11 @@ using static Boss.NetworkNamespace.Network;
 namespace Boss {
     internal class Program {
         static void Main() {
-            DataBase? dataBase = new(); 
+            Console.Title = "Boss Az";
+            DataBase? dataBase = new();
+
+            dataBase!.showVacancies();
+            PressAnyKey();
 
             List<string> choose = new();
             choose.Add("Admin");
@@ -17,14 +21,14 @@ namespace Boss {
 
             while(index != -1) {
                 index = Menu(choose);
-
+                
                 if (index == 0) {
                     ExceptionHandling(AdminChoose, dataBase!);
                 }else if (index == 1) {
                     ExceptionHandling(UserChoose, dataBase!);
                 }else if (index == 2) break;
             }
-
+            
             dataBase!.saveData();
         }
     }
