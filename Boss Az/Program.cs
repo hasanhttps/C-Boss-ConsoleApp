@@ -10,9 +10,6 @@ namespace Boss {
             Console.Title = "Boss Az";
             DataBase? dataBase = new();
 
-            dataBase!.showVacancies();
-            PressAnyKey();
-
             List<string> choose = new();
             choose.Add("Admin");
             choose.Add("User");
@@ -23,13 +20,11 @@ namespace Boss {
                 index = Menu(choose);
                 
                 if (index == 0) {
-                    ExceptionHandling(AdminChoose, dataBase!);
+                    ExceptionHandling(AdminChoose, dataBase!); // Admin Side of Program
                 }else if (index == 1) {
-                    ExceptionHandling(UserChoose, dataBase!);
+                    ExceptionHandling(UserChoose, dataBase!); // User Side of Program
                 }else if (index == 2) break;
-            }
-            
-            dataBase!.saveData();
+            }dataBase!.saveData();
         }
     }
 }

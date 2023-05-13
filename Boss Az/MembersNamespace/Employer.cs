@@ -28,7 +28,23 @@ namespace Boss.MembersNamespace {
 
         // Functions
 
-        public void addVanacncie(Vacancie? vacancie) {
+        public override string ToString() { 
+            return base.ToString();
+        }
+        
+        public void showVacancies() {
+            foreach(var vacancie in Vacancies) {
+                Console.WriteLine(vacancie);
+            }PressAnyKey();
+        }
+
+        public void showNotifications() {
+            foreach (var notification in Notifications) {
+                Console.WriteLine(notification);
+            }PressAnyKey();
+        }
+
+        public void addVacancy(Vacancie? vacancie) {
             try {
                 Console.WriteLine(vacancie);
                 if (vacancie != null) { Vacancies.Add(vacancie); }
@@ -39,8 +55,8 @@ namespace Boss.MembersNamespace {
             }
         }
 
-        public void addNotification(Notification notification) {
-            Notifications.Add(notification);
+        public void addNotification(Notification? notification) {
+            AddNotification(notification);
         }
     }
 }

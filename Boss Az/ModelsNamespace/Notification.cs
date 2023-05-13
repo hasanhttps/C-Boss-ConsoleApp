@@ -11,17 +11,17 @@ namespace Boss.ModelsNamespace {
 
         private readonly Guid _id;
         private readonly DateTime _dateTime;
-        private string _title;
-        private string _text;
-        public string _fromUser;
+        private string? _title;
+        private string? _text;
+        public string? _fromUser;
 
         // Properties
 
         public Guid Id { get { return _id; } }
         public DateTime DateTime { get { return _dateTime; } }
-        public string Title { get { return _title;} set { _title = value; } }
-        public string Text { get { return _text; } set { _text = value; } }
-        public string FromUser { get { return _fromUser; } set { _fromUser = value; } }
+        public string? Title { get { return _title;} set { _title = value; } }
+        public string? Text { get { return _text; } set { _text = value; } }
+        public string? FromUser { get { return _fromUser; } set { _fromUser = value; } }
 
         // Constructors
 
@@ -29,7 +29,7 @@ namespace Boss.ModelsNamespace {
             _id  = Guid.NewGuid();
             _dateTime = DateTime.Now;
         }
-        public Notification(string title, string text, string fromUser) : this() {
+        public Notification(string? title, string? text, string? fromUser) : this() {
             Title = title;
             Text = text;
             FromUser = fromUser;

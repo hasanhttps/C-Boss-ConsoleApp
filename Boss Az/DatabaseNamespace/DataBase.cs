@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Boss.MembersNamespace;
 using Boss.ModelsNamespace;
 using static Boss.DatabaseNamespace.JsonHandling;
+using static Boss.NetworkNamespace.Network;
 
 namespace Boss.DatabaseNamespace {
     public sealed class DataBase {
@@ -34,14 +35,10 @@ namespace Boss.DatabaseNamespace {
         // Constructors
 
         public DataBase() {
-            List<Admin> admins = ReadData<Admin>("admins");
-            _admins = admins;
-
-            List<Worker> workers = ReadData<Worker>("workers");
-            _workers = workers;
-
-            List<Employer> employers = ReadData<Employer>("employers");
-            _employers = employers;
+            _admins = ReadData<List<Admin>>("admins");
+            _workers = ReadData<List<Worker>>("workers");
+            _employers = ReadData<List<Employer>>("employers");
+            Admin.RequestedVacancies = ReadData<Dictionary<string, List<Vacancie>>>("Requested Vacancies");
         }
 
         // Functions
@@ -73,15 +70,25 @@ namespace Boss.DatabaseNamespace {
             } return false;
         }
 
-        public void applyVacancies(string? id) {
+        public void applyVacancies(string? id, string? adminName) {
             List<Vacancie> vacanciesToRemove = new();
 
             foreach (var keyValuePair in Admin.RequestedVacancies!) {
                 foreach (var vacancie in keyValuePair.Value) {
-                    if (vacancie.Id.ToString() == id) {
+                    if (vacancie.Id.ToString().Substring(0, 8) == id) {
                         foreach (var employer in Employers) {
                             if (keyValuePair.Key == employer.UserName) {
-                                employer.addVanacncie(vacancie);
+                                employer.addVacancy(vacancie);
+
+                                Notification notification = new("Vacancy verified", $"Your {vacancie.AnnounceDate.ToString("d")} created vacancy had been verified by Admin", adminName);
+                                employer.addNotification(notification);
+                                saveData();
+
+                                // Send Notification via SMTP
+
+                                Thread thread = new Thread(() => sendMail(employer.Email!, notification));
+                                thread.IsBackground = false;
+                                thread.Start();
                             }
                         } vacanciesToRemove.Add(vacancie);
                     }
@@ -92,10 +99,26 @@ namespace Boss.DatabaseNamespace {
             }
         }
 
+        public Employer? FindEmployerByVacancyId(string? id) {
+            foreach (var employer in Employers) {
+                foreach (var vacancy in employer.Vacancies) {
+                    if (vacancy.Id.ToString().Substring(0, 8) == id) {
+                        return employer;
+                    }
+                }
+            }return null;
+        }
+
+        public Worker? FindWorkerByUsername(string? username) {
+            foreach(var worker in Workers) {
+                if (username == worker.UserName) return worker;
+            }return null;
+        }
+
         public void showVacancies() {
             foreach(var employer in Employers) {
                 foreach(var vacancie in employer.Vacancies) {
-                    Console.WriteLine(vacancie);
+                    if (vacancie.ExpireAnnounceDate >= DateTime.Now) Console.WriteLine(vacancie);
                 }
             }
         }
@@ -104,7 +127,7 @@ namespace Boss.DatabaseNamespace {
             WriteData<List<Worker>>(Workers, "workers");
             WriteData<List<Employer>>(Employers, "employers");
             WriteData<List<Admin>>(Admins, "admins");
-            
+            WriteData<Dictionary<string, List<Vacancie>>>(Admin.RequestedVacancies, "Requested Vacancies");
         }
     }
 }

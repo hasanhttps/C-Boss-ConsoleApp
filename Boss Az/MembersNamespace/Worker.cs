@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using Boss.DatabaseNamespace;
 using Boss.Interfaces;
 using Boss.ModelsNamespace;
+using static Boss.Functions.Functions;
 
 namespace Boss.MembersNamespace {
     public sealed class Worker : User, INotifable {
 
         // Private Fields
 
-        private List<Cv> _cvs;
+        private List<Cv>? _cvs;
 
         // Properties
 
-        public List<Cv> Cvs { get { return _cvs; } set { _cvs = value; } }
+        public List<Cv>? Cvs { get { return _cvs; } set { _cvs = value; } }
 
         // Constructors
 
@@ -27,9 +28,19 @@ namespace Boss.MembersNamespace {
 
         // Functions
 
+        public override string ToString() { 
+            return base.ToString();
+        }
+
+        public void showNotifications() {
+            foreach(var notification in Notifications) {
+                Console.WriteLine(notification);
+            }PressAnyKey();
+        }
+
         public void addCv(Cv? cv) {
             try {
-                if (cv != null) { Cvs.Add(cv); }
+                if (cv != null) { Cvs!.Add(cv); }
                 else throw new ArgumentNullException(nameof(cv));
             }catch (ArgumentNullException ex) {
                 Console.WriteLine(ex.Message);
@@ -39,5 +50,6 @@ namespace Boss.MembersNamespace {
         public void addNotification(Notification notification) {
             Notifications.Add(notification);
         }
+
     }
 }

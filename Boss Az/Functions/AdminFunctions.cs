@@ -24,7 +24,7 @@ namespace Boss.Functions {
 
                     if (username != null && password != null) {
                         if (dataBase.checkAdmin(username, password)) {
-                            AdminMenu(dataBase);
+                            ExceptionHandling(AdminMenu, dataBase);
                         } else throw new Exception("Username or password is not valid !");
                     }
                 }else if (index == 1) break;
@@ -44,12 +44,11 @@ namespace Boss.Functions {
                 index = Menu(choose);
                 Admin? currentAdmin = dataBase.currentAdmin;
 
-                if (index == 0) {
+                if (index == 0) { // Apply the requested vacancies
                     currentAdmin!.showRequestVacancies();
-                    Console.Write("Please enter the id for apply vacancie : ");
+                    Console.Write("Please enter the first 8 character of id for apply vacancie : ");
                     string? id = Console.ReadLine();
-                    dataBase!.applyVacancies(id);
-
+                    dataBase!.applyVacancies(id, currentAdmin.UserName);
                 }else if (index == 1) {
                     dataBase!.showVacancies();
                     PressAnyKey();

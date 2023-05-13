@@ -66,5 +66,16 @@ namespace Boss.Members {
             City = city;
             Phone = phone;
         }
+
+        // Functions
+
+        public override string ToString() {
+            return $"Id : {Id} \n" +
+                   $"Name : {Name} \n" +
+                   $"Surname : {Surname} \n" +
+                   $"Age : {Age} \n" +
+                   $"City : {City} \n" +
+                   $"Phone number : {Phone} \n";
+        }
     }
 }

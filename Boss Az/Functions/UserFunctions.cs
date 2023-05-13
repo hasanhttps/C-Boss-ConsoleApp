@@ -22,9 +22,9 @@ namespace Boss.Functions {
                 index = Menu(choose);
                 
                 if (index == 0) {
-                    WorkerChoose(dataBase!);
+                    ExceptionHandling(WorkerChoose, dataBase); 
                 }else if (index == 1) {
-                    EmployerChoose(dataBase!);
+                    ExceptionHandling(EmployerChoose, dataBase);
                 }else if (index == 2) break;
             }
         }

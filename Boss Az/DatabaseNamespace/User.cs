@@ -12,11 +12,11 @@ namespace Boss.DatabaseNamespace {
 
         // Private Fields
 
+        private List<Notification> _notifications = new();
         private string _email;
         private string _username;
         private string _password;
         private int _budget;
-        private List<Notification> _notifications;
 
         // Properties
 
