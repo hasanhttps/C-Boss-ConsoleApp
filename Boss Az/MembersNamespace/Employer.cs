@@ -46,7 +46,6 @@ namespace Boss.MembersNamespace {
 
         public void addVacancy(Vacancie? vacancie) {
             try {
-                Console.WriteLine(vacancie);
                 if (vacancie != null) { Vacancies.Add(vacancie); }
                 else throw new ArgumentNullException(nameof(vacancie));
             }catch (Exception ex) {
