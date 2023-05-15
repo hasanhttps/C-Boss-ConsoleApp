@@ -13,11 +13,11 @@ namespace Boss.MembersNamespace {
 
         // Private Fields
 
-        private List<Cv>? _cvs;
+        private List<Cv> _cvs = new();
 
         // Properties
 
-        public List<Cv>? Cvs { get { return _cvs; } set { _cvs = value; } }
+        public List<Cv> Cvs { get { return _cvs; } set { _cvs = value; } }
 
         // Constructors
 

@@ -30,6 +30,7 @@ namespace Boss.Functions {
         }
 
         public static bool checkRegistrationCode(string email) {
+
             // Creating Random Data
 
             Random random = new Random();

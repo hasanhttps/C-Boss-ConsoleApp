@@ -69,12 +69,13 @@ namespace Boss.Functions {
         public static void sendCv(DataBase dataBase) {
             Console.Write("Please enter the first 8 char of Id : ");
             string? id = Console.ReadLine();
-            Cv? cv = createCv(dataBase);
+            Cv cv = createCv(dataBase)!;
 
             if (cv != null) {
-                Notification? notification = new("You have cv request", $"Your vacancy with [{id}] id have cv request by worker.\nWorker Cv\n\n{cv}", dataBase!.currentWorker!.UserName);
+                Notification? notification = new("You have cv request", $"Your vacancy with [{id}] id have cv request by worker.\nWorker Cv\n\n{cv}\n", dataBase!.currentWorker!.UserName);
                 Employer? employer = dataBase!.FindEmployerByVacancyId(id);
                 employer!.addNotification(notification);
+                dataBase!.currentWorker.Cvs.Add(cv);
                 dataBase!.saveData();
 
                 // Send Notification via SMTP

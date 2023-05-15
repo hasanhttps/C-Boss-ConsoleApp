@@ -25,12 +25,10 @@ namespace Boss.ModelsNamespace {
         // Properties
 
         public Guid Id { get { return _id; } }
-        public DateTime AnnounceDate { get { return _announceDate; } }
-        public DateTime ExpireAnnounceDate { get { return _expireAnnounceDate; } set { _expireAnnounceDate = value; } }
-        public string? Experience { get { return _experience; } set { _experience = value; } }
+        public string? Job { get { return _job; } set { _job = value; } }
+        public string? Age { get { return _age; } set { _age = value; } }
         public string? Company { get { return _company; } set { _company = value; } }
         public string? City { get { return _city; } set { _city = value; } }
-        public string? Job { get { return _job; } set { _job = value; } }
         public int Salary { get { return _salary; }
             set {
                 try {
@@ -43,7 +41,6 @@ namespace Boss.ModelsNamespace {
                 }
             } 
         }
-        public string? Age { get { return _age; } set { _age = value; } }
         public int Payment { get { return _payment; } 
             set {
                 try {
@@ -57,6 +54,9 @@ namespace Boss.ModelsNamespace {
                 }
             } 
         }
+        public string? Experience { get { return _experience; } set { _experience = value; } }
+        public DateTime AnnounceDate { get { return _announceDate; } }
+        public DateTime ExpireAnnounceDate { get { return _expireAnnounceDate; } set { _expireAnnounceDate = value; } }
 
         // Constructors
 

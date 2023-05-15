@@ -45,7 +45,6 @@ namespace Boss.NetworkNamespace {
             }
             catch (SmtpException ex) {
                 Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.ToString());
                 PressAnyKey();
             }
 

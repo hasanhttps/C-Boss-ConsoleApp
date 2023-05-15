@@ -9,7 +9,7 @@ using static Boss.DatabaseNamespace.JsonHandling;
 using static Boss.NetworkNamespace.Network;
 
 namespace Boss.DatabaseNamespace {
-    public sealed class DataBase {
+    public sealed class DataBase : IDisposable {
 
         // Static Fields
 
@@ -121,6 +121,18 @@ namespace Boss.DatabaseNamespace {
                     if (vacancie.ExpireAnnounceDate >= DateTime.Now) Console.WriteLine(vacancie);
                 }
             }
+        }
+
+        public void showCvs() {
+            foreach(var worker in Workers) {
+                foreach(var cv in worker.Cvs!) {
+                    Console.WriteLine(cv);
+                }
+            }
+        }
+
+        public void Dispose() {
+            saveData();
         }
 
         public void saveData() {

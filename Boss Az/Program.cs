@@ -10,6 +10,17 @@ namespace Boss {
             Console.Title = "Boss Az";
             DataBase? dataBase = new();
 
+            // GUI System
+
+            var guessIndex = 1;
+
+            while (guessIndex != -1) {
+                guessIndex = GuessMenu(guessCheck, dataBase);
+            }
+            Console.Clear();
+
+            // Menu System
+
             List<string> choose = new();
             choose.Add("Admin");
             choose.Add("User");
@@ -24,7 +35,7 @@ namespace Boss {
                 }else if (index == 1) {
                     ExceptionHandling(UserChoose, dataBase!); // User Side of Program
                 }else if (index == 2) break;
-            }dataBase!.saveData();
+            }dataBase!.Dispose();
         }
     }
 }

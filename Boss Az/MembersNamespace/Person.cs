@@ -13,14 +13,26 @@ namespace Boss.Members {
 
         private readonly Guid _id;
         private int _age;
-        private string _name;
-        private string _surname;
-        private string _city;
-        private string _phone;
+        private string? _name;
+        private string? _surname;
+        private string? _city;
+        private string? _phone;
 
         // Properties
 
         public Guid Id { get { return _id; } }
+        public string? Name { get { return _name; }
+            set {
+                try {
+                    if (value.Length >= 3 && Regex.IsMatch(value, "^[a-zA-Z]*$")) _name = value;
+                    else throw new Exception("Not valid name format !");
+                }catch(Exception ex) {
+                    Console.WriteLine(ex.Message);
+                    PressAnyKey();
+                }
+            }
+        }
+        public string? Surname { get { return _surname; } set { _surname = value; } }
         public int Age { get { return _age; }
             set {
                 try { 
@@ -37,20 +49,8 @@ namespace Boss.Members {
                 }
             }
         }
-        public string Name { get { return _name; }
-            set {
-                try {
-                    if (value.Length >= 3 && Regex.IsMatch(value, "^[a-zA-Z]*$")) _name = value;
-                    else throw new Exception("Not valid name format !");
-                }catch(Exception ex) {
-                    Console.WriteLine(ex.Message);
-                    PressAnyKey();
-                }
-            }
-        }
-        public string Surname { get { return _surname; } set { _surname = value; } }
-        public string City { get { return _city; } set { _city = value; } }
-        public string Phone { get { return _phone; } set { _phone = value; } }
+        public string? City { get { return _city; } set { _city = value; } }
+        public string? Phone { get { return _phone; } set { _phone = value; } }
 
         // Constructors
 

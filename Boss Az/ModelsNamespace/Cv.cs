@@ -25,6 +25,16 @@ namespace Boss.ModelsNamespace {
 
         // Properties
 
+        public DateTime StartTime { get { return _startTime; } }
+        public DateTime EndTime { get { return _endTime; } set { _endTime = value; } }
+        public string? Job { get { return _job; } set { _job = value; } }
+        public string? School { get { return _school; } set { _school = value; } }
+        public string? Skills { get { return _skills; } set { _skills = value; } }
+        public string? Companies { get { return _companies; } set { _companies = value; } }
+        public string? ForeignLanguages { get { return _foreignLanguages; } set { _foreignLanguages = value; } }
+        public string? Linkedin { get { return _linkedin; } set { _linkedin = value; } }
+        public string? GitUrl { get { return _gitUrl; } set { _gitUrl = value; } }
+        public string? HaveDifCert { get { return _haveDifCert; } set { _haveDifCert = value; } }
         public int GraduateScore { get { return _graduateScore; }  
             set {
                 try {
@@ -37,16 +47,6 @@ namespace Boss.ModelsNamespace {
                 }
             } 
         }
-        public DateTime StartTime { get { return _startTime; } }
-        public DateTime EndTime { get { return _endTime; } set { _endTime = value; } }
-        public string? Job { get { return _job; } set { _job = value; } }
-        public string? School { get { return _school; } set { _school = value; } }
-        public string? Skills { get { return _skills; } set { _skills = value; } }
-        public string? Companies { get { return _companies; } set { _companies = value; } }
-        public string? ForeignLanguages { get { return _foreignLanguages; } set { _foreignLanguages = value; } }
-        public string? Linkedin { get { return _linkedin; } set { _linkedin = value; } }
-        public string? GitUrl { get { return _gitUrl; } set { _gitUrl = value; } }
-        public string? HaveDifCert { get { return _haveDifCert; } set { _haveDifCert = value; } }
         public int Payment { get { return _payment; } 
             set {
                 try {
@@ -66,6 +66,7 @@ namespace Boss.ModelsNamespace {
         public Cv() { 
             _startTime = DateTime.Now;
         }
+
         public Cv(string? job, string? school, string? skills,
             string? companies, string? foreignLanguages, string? gitUrl, string? linkedin,
             int graduateScore, string? haveDifCert) : this()
