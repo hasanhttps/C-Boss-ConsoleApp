@@ -55,6 +55,7 @@ namespace Boss.MembersNamespace {
         }
 
         public void addNotification(Notification? notification) {
+            notification.DateTime = DateTime.Now;
             AddNotification(notification);
         }
     }

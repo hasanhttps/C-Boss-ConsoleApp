@@ -68,12 +68,12 @@ namespace Boss.Functions {
         }
 
         public static void verifyCv(DataBase dataBase) {
-            Console.Write("Please enter the name of worker : ");
-            string? name = Console.ReadLine();
-            if (name != null) { 
-                Worker? worker = dataBase!.FindWorkerByUsername(name);
+            Console.Write("Please enter the first 8 char of id : ");
+            string? id = Console.ReadLine();
+            if (id != null) { 
+                Worker? worker = dataBase!.FindWorkerById(id);
                 if (worker != null) {
-                    Notification notification = new("Vacancy verified", $"Your cv accepted by Employer", dataBase!.currentEmployer!.UserName);
+                    Notification notification = new("Vacancy verified", $"Your cv with [{id}] id accepted by Employer", dataBase!.currentEmployer!.UserName);
                     worker.addNotification(notification);
 
                     // Send Notification via SMTP
@@ -88,7 +88,7 @@ namespace Boss.Functions {
 
         public static void createVacancie(DataBase dataBase) {
 
-            Console.WriteLine("Fill the vacancie\n");
+            Console.WriteLine("Fill the vacancie\n\n");
 
             Console.Write("Please enter the job : ");
             string? job = Console.ReadLine();
@@ -112,6 +112,8 @@ namespace Boss.Functions {
             currentEmployer.Budget -= payment;
 
             Vacancie vacancie = new(experience, company, city, job, age, salary, payment);
+            vacancie.AnnounceDate = DateTime.Now;
+            vacancie.Id = Guid.NewGuid();
 
             try {
                 Admin.RequestedVacancies![currentEmployer.UserName].Add(vacancie);

@@ -98,7 +98,7 @@ namespace Boss.Functions {
             string? school = Console.ReadLine();
             Console.Write("Please enter your graduate score : ");
             string? graduateScoreStr = Console.ReadLine();
-            if (!int.TryParse(graduateScoreStr, out int graduateScore)) throw new Exception("Graduate score couldn't be any char !");
+            if (!float.TryParse(graduateScoreStr, out float graduateScore)) throw new Exception("Graduate score couldn't be any char !");
             Console.Write("Please enter your skills : ");
             string? skills = Console.ReadLine();
             Console.Write("Please enter the companies you worked : ");
@@ -118,6 +118,8 @@ namespace Boss.Functions {
 
             Cv? newCv = new(job, school, skills, companies, foreignLanguages, gitUrl, linkedIn, graduateScore, haveDifferCert);
             newCv.Payment = payment;
+            newCv.StartTime = DateTime.Now;
+            newCv.Id = Guid.NewGuid();
 
             return newCv;
         }

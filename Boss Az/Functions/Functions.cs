@@ -18,7 +18,7 @@ namespace Boss.Functions {
             Console.Write("\nPress any key to continue . . .");
             Console.ReadKey();
         }
-
+  
         public static void ExceptionHandling(Action<DataBase> action, DataBase dataBase) {
             try {
                 action(dataBase);

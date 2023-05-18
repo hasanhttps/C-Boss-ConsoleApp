@@ -1,11 +1,12 @@
-﻿using Boss.DatabaseNamespace;
+﻿using Boss.ModelsNamespace;
 using Boss.MembersNamespace;
-using Boss.ModelsNamespace;
-using static Boss.Functions.Functions;
-using static Boss.NetworkNamespace.Network;
+using Boss.DatabaseNamespace;
+using static Boss.Functions.Functions; // Functions class that contains all functions. (Menus, Send Notification etc.)
+using static Boss.NetworkNamespace.Network; // This class provide us send mail.
 
 namespace Boss {
-    internal class Program {
+    public class Program {
+
         static void Main() {
             Console.Title = "Boss Az";
             DataBase? dataBase = new();

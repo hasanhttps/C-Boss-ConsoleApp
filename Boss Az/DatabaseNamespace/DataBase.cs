@@ -96,7 +96,7 @@ namespace Boss.DatabaseNamespace {
                 foreach (var vacancy in vacanciesToRemove) {
                     keyValuePair.Value.Remove(vacancy);
                 }
-            }
+            }saveData();
         }
 
         public Employer? FindEmployerByVacancyId(string? id) {
@@ -109,9 +109,9 @@ namespace Boss.DatabaseNamespace {
             }return null;
         }
 
-        public Worker? FindWorkerByUsername(string? username) {
+        public Worker? FindWorkerById(string? id) {
             foreach(var worker in Workers) {
-                if (username == worker.UserName) return worker;
+                foreach(var cv in worker.Cvs) if (id == cv.Id.ToString().Substring(0,8)) return worker;
             }return null;
         }
 

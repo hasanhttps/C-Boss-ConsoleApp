@@ -10,7 +10,7 @@ namespace Boss.ModelsNamespace {
         // Private Fields
 
         private readonly Guid _id;
-        private readonly DateTime _dateTime;
+        private DateTime _dateTime;
         private string? _title;
         private string? _text;
         public string? _fromUser;
@@ -18,7 +18,7 @@ namespace Boss.ModelsNamespace {
         // Properties
 
         public Guid Id { get { return _id; } }
-        public DateTime DateTime { get { return _dateTime; } }
+        public DateTime DateTime { get { return _dateTime; } set { _dateTime = value; } }
         public string? Title { get { return _title;} set { _title = value; } }
         public string? Text { get { return _text; } set { _text = value; } }
         public string? FromUser { get { return _fromUser; } set { _fromUser = value; } }

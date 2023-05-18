@@ -11,8 +11,8 @@ namespace Boss.ModelsNamespace {
 
         // Private Fields
 
-        private readonly Guid _id;
-        private readonly DateTime _announceDate;
+        private Guid _id;
+        private DateTime _announceDate;
         private DateTime _expireAnnounceDate;
         private string? _experience;
         private string? _company;
@@ -24,7 +24,7 @@ namespace Boss.ModelsNamespace {
 
         // Properties
 
-        public Guid Id { get { return _id; } }
+        public Guid Id { get { return _id; } set { _id = value; } }
         public string? Job { get { return _job; } set { _job = value; } }
         public string? Age { get { return _age; } set { _age = value; } }
         public string? Company { get { return _company; } set { _company = value; } }
@@ -55,15 +55,12 @@ namespace Boss.ModelsNamespace {
             } 
         }
         public string? Experience { get { return _experience; } set { _experience = value; } }
-        public DateTime AnnounceDate { get { return _announceDate; } }
+        public DateTime AnnounceDate { get { return _announceDate; } set { _announceDate = value; } }
         public DateTime ExpireAnnounceDate { get { return _expireAnnounceDate; } set { _expireAnnounceDate = value; } }
 
         // Constructors
 
-        public Vacancie() {
-            _id = Guid.NewGuid();
-            _announceDate = DateTime.Now;
-        }
+        public Vacancie() { }
         public Vacancie(string? experience, string? company,
             string? city, string? job, string? age, int salary, int payment) : this()
         {

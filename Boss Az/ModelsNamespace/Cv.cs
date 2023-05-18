@@ -10,7 +10,8 @@ namespace Boss.ModelsNamespace {
 
         // Private Fields
 
-        private readonly DateTime _startTime;
+        private Guid _id;
+        private DateTime _startTime;
         private DateTime _endTime;
         private string? _job;
         private string? _school;
@@ -20,12 +21,13 @@ namespace Boss.ModelsNamespace {
         private string? _gitUrl;
         private string? _linkedin;
         private string? _haveDifCert;
-        private int _graduateScore;
+        private float _graduateScore;
         private int _payment;
 
         // Properties
 
-        public DateTime StartTime { get { return _startTime; } }
+        public Guid Id { get { return _id; } set { _id = value; } }
+        public DateTime StartTime { get { return _startTime; } set { _startTime = value; } }
         public DateTime EndTime { get { return _endTime; } set { _endTime = value; } }
         public string? Job { get { return _job; } set { _job = value; } }
         public string? School { get { return _school; } set { _school = value; } }
@@ -35,7 +37,7 @@ namespace Boss.ModelsNamespace {
         public string? Linkedin { get { return _linkedin; } set { _linkedin = value; } }
         public string? GitUrl { get { return _gitUrl; } set { _gitUrl = value; } }
         public string? HaveDifCert { get { return _haveDifCert; } set { _haveDifCert = value; } }
-        public int GraduateScore { get { return _graduateScore; }  
+        public float GraduateScore { get { return _graduateScore; }  
             set {
                 try {
                     if (value < 0) throw new Exception("Graduate Score could'nt be lower than zero !");
@@ -63,13 +65,11 @@ namespace Boss.ModelsNamespace {
 
         // Constructors
 
-        public Cv() { 
-            _startTime = DateTime.Now;
-        }
+        public Cv() { }
 
         public Cv(string? job, string? school, string? skills,
             string? companies, string? foreignLanguages, string? gitUrl, string? linkedin,
-            int graduateScore, string? haveDifCert) : this()
+            float graduateScore, string? haveDifCert) : this()
         {
             Job = job;
             School = school;
@@ -85,7 +85,8 @@ namespace Boss.ModelsNamespace {
         // Functions
 
         public override string ToString() {
-            return $"Job : {Job} \n" +
+            return $"Id : {Id} \n" +
+                   $"Job : {Job} \n" +
                    $"School : {School} \n" +
                    $"Skills : {Skills} \n" +
                    $"Companies : {Companies} \n" +
