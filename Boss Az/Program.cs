@@ -8,35 +8,28 @@ namespace Boss {
     public class Program {
 
         static void Main() {
+
             Console.Title = "Boss Az";
             DataBase? dataBase = new();
 
-            // GUI System
 
-            var guessIndex = 1;
-
-            while (guessIndex != -1) {
-                guessIndex = GuessMenu(guessCheck, dataBase);
-            }
-            Console.Clear();
-
-            // Menu System
-
-            List<string> choose = new();
-            choose.Add("Admin");
-            choose.Add("User");
-            choose.Add("Exit");
+            List<string> menu = new();
+            menu.Add("Guest");
+            menu.Add("Register");
+            menu.Add("Exit");
             var index = 1;
 
-            while(index != -1) {
-                index = Menu(choose);
-                
+            while (index != -1) {
+                index = Menu(menu);
+
                 if (index == 0) {
-                    ExceptionHandling(AdminChoose, dataBase!); // Admin Side of Program
+                    GuiSystem(dataBase!); // Call the guest menu 
                 }else if (index == 1) {
-                    ExceptionHandling(UserChoose, dataBase!); // User Side of Program
+                    MenuSystem(dataBase!); // Call the register menu
                 }else if (index == 2) break;
-            }dataBase!.Dispose();
+            }
+
+           
         }
     }
 }

@@ -75,19 +75,22 @@ namespace Boss.Functions {
                 if (worker != null) {
                     Notification notification = new("Vacancy verified", $"Your cv with [{id}] id accepted by Employer", dataBase!.currentEmployer!.UserName);
                     worker.addNotification(notification);
+                    Notification adminNotification = new("New User", $"{worker.Name}'s cv with [{id}] id accepted by Employer", "Boss Az");
+                    adminNotification.DateTime = DateTime.Now;
+                    Admin.Notifications.Add(adminNotification); // Send admin notification
 
                     // Send Notification via SMTP
 
                     Thread thread = new Thread(() => sendMail(worker.Email!, notification));
                     thread.IsBackground = false;
                     thread.Start();
-                    dataBase!.saveData();
+                    dataBase.saveData();
                 }
             }
         }
 
         public static void createVacancie(DataBase dataBase) {
-
+            Categories category = chooseCategory();
             Console.WriteLine("Fill the vacancie\n\n");
 
             Console.Write("Please enter the job : ");
@@ -112,8 +115,12 @@ namespace Boss.Functions {
             currentEmployer.Budget -= payment;
 
             Vacancie vacancie = new(experience, company, city, job, age, salary, payment);
+            Notification adminNotification = new("New Vacancie", $"{currentEmployer.Name} have created new vacancie!", "Boss Az");
+            adminNotification.DateTime = DateTime.Now;
+            Admin.Notifications.Add(adminNotification); // Send admin notification
             vacancie.AnnounceDate = DateTime.Now;
             vacancie.Id = Guid.NewGuid();
+            vacancie.Category = category;
 
             try {
                 Admin.RequestedVacancies![currentEmployer.UserName].Add(vacancie);
@@ -122,6 +129,19 @@ namespace Boss.Functions {
                 vacancies.Add(vacancie);
                 Admin.RequestedVacancies!.Add(currentEmployer.UserName, vacancies);
             }
+            dataBase.saveData();
+        }
+        
+        public static Categories chooseCategory() {
+            List<string> categories = Enum.GetNames(typeof(Categories)).ToList();
+            var index = -1;
+
+            while (index == -1) {
+                index = Menu(categories);
+            }
+            int category = index + 1;
+            Enum.TryParse<Categories>((category).ToString(), out Categories result);
+            return result;
         }
 
 

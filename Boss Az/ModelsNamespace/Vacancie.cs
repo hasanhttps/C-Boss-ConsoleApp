@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boss.MembersNamespace;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
@@ -14,6 +15,7 @@ namespace Boss.ModelsNamespace {
         private Guid _id;
         private DateTime _announceDate;
         private DateTime _expireAnnounceDate;
+        private Categories _category;
         private string? _experience;
         private string? _company;
         private string? _city;
@@ -25,6 +27,7 @@ namespace Boss.ModelsNamespace {
         // Properties
 
         public Guid Id { get { return _id; } set { _id = value; } }
+        public Categories Category { get { return _category; } set { _category = value; } }
         public string? Job { get { return _job; } set { _job = value; } }
         public string? Age { get { return _age; } set { _age = value; } }
         public string? Company { get { return _company; } set { _company = value; } }
@@ -77,6 +80,7 @@ namespace Boss.ModelsNamespace {
 
         public override string ToString() {
             return $"Id : {Id} \n" +
+                   $"Category : {Category.ToString()}\n" +
                    $"Job : {Job} \n" +
                    $"Age : {Age} \n" +
                    $"City : {City} \n" +

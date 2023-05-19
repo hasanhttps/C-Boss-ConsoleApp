@@ -38,7 +38,7 @@ namespace Boss.ModelsNamespace {
         // Functions
 
         public override string ToString() {
-            string notification = $"Date : {DateTime}\nFrom : {FromUser}\nTitle : {Title}\nText : {Text}";
+            string notification = $"Date : {DateTime}\nFrom : {FromUser}\nTitle : {Title}\nText : {Text}\n";
             return notification;
         }
     }

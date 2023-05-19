@@ -38,6 +38,7 @@ namespace Boss.DatabaseNamespace {
             _admins = ReadData<List<Admin>>("admins");
             _workers = ReadData<List<Worker>>("workers");
             _employers = ReadData<List<Employer>>("employers");
+            Admin.Notifications = ReadData<List<Notification>>("admin notifications");
             Admin.RequestedVacancies = ReadData<Dictionary<string, List<Vacancie>>>("Requested Vacancies");
         }
 
@@ -139,6 +140,7 @@ namespace Boss.DatabaseNamespace {
             WriteData<List<Worker>>(Workers, "workers");
             WriteData<List<Employer>>(Employers, "employers");
             WriteData<List<Admin>>(Admins, "admins");
+            WriteData<List<Notification>>(Admin.Notifications, "admin notifications");
             WriteData<Dictionary<string, List<Vacancie>>>(Admin.RequestedVacancies, "Requested Vacancies");
         }
     }

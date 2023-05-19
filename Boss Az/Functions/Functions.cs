@@ -28,6 +28,33 @@ namespace Boss.Functions {
             }
         }
 
+        public static void GuiSystem(DataBase dataBase) {
+            var guessIndex = 1;
+
+            while (guessIndex != -1) {
+                guessIndex = GuessMenu(guessCheck, dataBase);
+            } Console.Clear();
+            dataBase.saveData();
+        }
+
+        public static void MenuSystem(DataBase dataBase) {
+             List<string> choose = new();
+            choose.Add("Admin");
+            choose.Add("User");
+            choose.Add("Exit");
+            var index = 1;
+
+            while(index != -1) {
+                index = Menu(choose);
+                
+                if (index == 0) {
+                    ExceptionHandling(AdminChoose, dataBase); // Admin Side of Program
+                }else if (index == 1) {
+                    ExceptionHandling(UserChoose, dataBase); // User Side of Program
+                }else if (index == 2) break;
+            }dataBase.Dispose();
+        }
+
         public static void guessCheck(DataBase dataBase, int guessIndex) {
             Console.SetCursorPosition(0, 7);
 
@@ -37,7 +64,8 @@ namespace Boss.Functions {
                         Console.WriteLine($"Id : {vacancie.Id}\n{vacancie.Job}\n{vacancie.Salary} AZN\n{vacancie.Company}\n");
                     }
                 }
-            }else if (guessIndex == 1) { 
+            }
+            else if (guessIndex == 1) { 
                 dataBase!.showCvs();
             }else if (guessIndex == 2) {
                 Console.WriteLine("Boss Az is originally worker or job finder platform. This program provides you with job.\nAll rights are deserved.");

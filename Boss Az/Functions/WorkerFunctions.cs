@@ -23,16 +23,7 @@ namespace Boss.Functions {
                 index = Menu(choose);
                 
                 if (index == 0) {
-                    Console.Write("Please enter the username or email : ");
-                    string? username = Console.ReadLine();
-                    Console.Write("Please enter the password : ");
-                    string? password = Console.ReadLine();
-
-                    if (username != null && password != null) {
-                        if (dataBase.checkWorker(username, password)) {
-                            ExceptionHandling(WorkerMenu, dataBase);
-                        }else throw new Exception("Username or password is not valid !");
-                    }
+                    ExceptionHandling(loginWorker, dataBase);
                 }
                 else if (index == 1) {
                     registration(dataBase, addWorkerDatabase);
@@ -41,9 +32,23 @@ namespace Boss.Functions {
             }
         }
 
+        public static void loginWorker(DataBase dataBase) {
+            Console.Write("Please enter the username or email : ");
+            string? username = Console.ReadLine();
+            Console.Write("Please enter the password : ");
+            string? password = Console.ReadLine();
+
+            if (username != null && password != null) {
+                if (dataBase.checkWorker(username, password)) {
+                    ExceptionHandling(WorkerMenu, dataBase);
+                }else throw new Exception("Username or password is not valid !");
+            }
+        }
+
         public static void WorkerMenu(DataBase dataBase) {
             List<string> choose = new();
             choose.Add("Vacancies");
+            choose.Add("Filter Vacancies");
             choose.Add("Profile");
             choose.Add("Notifications");
             choose.Add("Exit");
@@ -55,14 +60,26 @@ namespace Boss.Functions {
                 if (index == 0) {
                     dataBase!.showVacancies();
                     sendCv(dataBase);
+                }else if (index == 1) {
+                    Console.WriteLine("Choose category\n\n");
+                    Categories category = chooseCategory();
+
+                    foreach(var employer in dataBase.Employers) {
+                        foreach(var cv in employer.Vacancies) {
+                            if (cv.Category == category) {
+                                Console.WriteLine(cv);
+                            }
+                        }
+                    }
+                    PressAnyKey();
                 }
-                else if (index == 1) {
+                else if (index == 2) {
                     Console.WriteLine("Profile Info\n");
                     Console.WriteLine(dataBase!.currentWorker);
                     PressAnyKey();
-                }else if (index == 2) {
+                }else if (index == 3) {
                     dataBase!.currentWorker!.showNotifications();
-                }else if (index == 3) break;
+                }else if (index == 4) break;
             }
         }
 
@@ -74,6 +91,8 @@ namespace Boss.Functions {
             if (cv != null) {
                 Notification? notification = new("You have cv request", $"Your vacancy with [{id}] id have cv request by worker.\nWorker Cv\n\n{cv}\n", dataBase!.currentWorker!.UserName);
                 Employer? employer = dataBase!.FindEmployerByVacancyId(id);
+                Notification adminNotification = new($"{employer!.UserName} have cv request", $"{employer.UserName}'s vacancy with [{id}] id have request by {dataBase.currentWorker.UserName}.", "Boss Az");
+                Admin.Notifications.Add(adminNotification);
                 employer!.addNotification(notification);
                 dataBase!.currentWorker.Cvs.Add(cv);
                 dataBase!.saveData();
@@ -85,6 +104,7 @@ namespace Boss.Functions {
                 thread.Start();
             }
         }
+
         public static void addWorkerDatabase(DataBase dataBase, User user) {
             Worker worker = new(user); // create worker
             dataBase.Workers.Add(worker); // add worker to database
