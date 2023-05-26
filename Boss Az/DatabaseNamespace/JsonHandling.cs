@@ -17,13 +17,14 @@ namespace Boss.DatabaseNamespace {
             File.WriteAllText(path + filename + ".json", JsonSerializer.Serialize(list, op));
         }
 
-        public static T ReadData<T>(string filename) {
+        public static T? ReadData<T>(string filename) where T : new() {
+            T? readData = new T();
             JsonSerializerOptions op = new JsonSerializerOptions();
             op.WriteIndented = true;
             using FileStream fs = new FileStream(path + filename + ".json", FileMode.OpenOrCreate);
+            if (fs.Length != 0) readData = JsonSerializer.Deserialize<T>(fs, op);
 
-            T? readData = JsonSerializer.Deserialize<T>(fs, op);
-            return readData!;
+            return readData;
         }
     }
 }

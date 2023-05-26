@@ -35,11 +35,21 @@ namespace Boss.DatabaseNamespace {
         // Constructors
 
         public DataBase() {
-            _admins = ReadData<List<Admin>>("admins");
-            _workers = ReadData<List<Worker>>("workers");
-            _employers = ReadData<List<Employer>>("employers");
-            Admin.Notifications = ReadData<List<Notification>>("admin notifications");
+            _admins = ReadData<List<Admin>>("admins")!;
+            _workers = ReadData<List<Worker>>("workers")!;
+            _employers = ReadData<List<Employer>>("employers")!;
+            Admin.Notifications = ReadData<List<Notification>>("admin notifications")!;
             Admin.RequestedVacancies = ReadData<Dictionary<string, List<Vacancie>>>("Requested Vacancies");
+            if (_admins.Count == 0) {
+                _admins = new();
+                Admin admin = new Admin("Hasanhttps", "hasanabdullazad@gmail.com", "2000Hasan");
+                admin.Name = "Hesen";
+                admin.Surname = "Abdullazade";
+                admin.Age = 18;
+                admin.City = "Baku";
+                admin.Phone = "050-335-65-02";
+                _admins.Add(admin);
+            }
         }
 
         // Functions
