@@ -24,3 +24,4 @@ Technical Details:
 15. Partial static class function class that different filename for admin, user, worker, employer names but in one function
 16. Menu's and interface
 17. Const field and nullable occasions
+18. Idispose for saving datas to files
